@@ -6,10 +6,10 @@ import java.util.Map;
 
 import org.processmining.framework.util.Pair;
 import org.processmining.models.graphbased.AbstractGraphElement;
-//import org.processmining.models.graphbased.directed.opennet.OpenNet;
-//import org.processmining.models.graphbased.directed.opennet.OpenNetLabel;
-//import org.processmining.models.graphbased.directed.opennet.OpenNetLabel.Type;
-//import org.processmining.models.graphbased.directed.opennet.OpenNetPort;
+import org.processmining.models.graphbased.directed.opennet.OpenNet;
+import org.processmining.models.graphbased.directed.opennet.OpenNetLabel;
+import org.processmining.models.graphbased.directed.opennet.OpenNetLabel.Type;
+import org.processmining.models.graphbased.directed.opennet.OpenNetPort;
 import org.processmining.models.graphbased.directed.petrinet.elements.ExpandableSubNet;
 import org.processmining.plugins.pnml.base.Pnml;
 import org.processmining.plugins.pnml.elements.PnmlNode;
@@ -67,39 +67,39 @@ public class PnmlPort extends PnmlNode {
 		return s;
 	}
 
-//	public void convertToOpenNet(OpenNet openNet) {
-//		/*
-//		 * If no name specified, use the id as label.
-//		 */
-//		OpenNetPort port = new OpenNetPort((((name != null) && (name.text != null)) ? name.text.getText() : id), id);
-//		openNet.getInterface().add(port);
-//
-//		for (PnmlLabel label : labelList) {
-//			label.convertToOpenNet(port);
-//		}
-//	}
-//
-//	public PnmlPort convertFromOpenNet(OpenNetPort openNetPort,
-//			Map<Pair<AbstractGraphElement, ExpandableSubNet>, String> map) {
-//		name = factory.createPnmlName(openNetPort.getLabel());
-//		id = openNetPort.getId();
-//
-//		for (OpenNetLabel openNetLabel : openNetPort) {
-//
-//			PnmlLabel label;
-//
-//			if (openNetLabel.getType().equals(Type.SYNC)) {
-//				label = factory.createPnmlLabelSync();
-//			} else if (openNetLabel.getType().equals(Type.ASYNC_INPUT)) {
-//				label = factory.createPnmlLabelInput();
-//			} else {//if (openNetLabel.getType().equals(Type.SYNC_WRITE)) {
-//				label = factory.createPnmlLabelOutput();
-//			}
-//
-//			label.convertFromOpenNet(openNetLabel, map);
-//			labelList.add(label);
-//		}
-//
-//		return this;
-//	}
+	public void convertToOpenNet(OpenNet openNet) {
+		/*
+		 * If no name specified, use the id as label.
+		 */
+		OpenNetPort port = new OpenNetPort((((name != null) && (name.text != null)) ? name.text.getText() : id), id);
+		openNet.getInterface().add(port);
+
+		for (PnmlLabel label : labelList) {
+			label.convertToOpenNet(port);
+		}
+	}
+
+	public PnmlPort convertFromOpenNet(OpenNetPort openNetPort,
+			Map<Pair<AbstractGraphElement, ExpandableSubNet>, String> map) {
+		name = factory.createPnmlName(openNetPort.getLabel());
+		id = openNetPort.getId();
+
+		for (OpenNetLabel openNetLabel : openNetPort) {
+
+			PnmlLabel label;
+
+			if (openNetLabel.getType().equals(Type.SYNC)) {
+				label = factory.createPnmlLabelSync();
+			} else if (openNetLabel.getType().equals(Type.ASYNC_INPUT)) {
+				label = factory.createPnmlLabelInput();
+			} else {//if (openNetLabel.getType().equals(Type.SYNC_WRITE)) {
+				label = factory.createPnmlLabelOutput();
+			}
+
+			label.convertFromOpenNet(openNetLabel, map);
+			labelList.add(label);
+		}
+
+		return this;
+	}
 }

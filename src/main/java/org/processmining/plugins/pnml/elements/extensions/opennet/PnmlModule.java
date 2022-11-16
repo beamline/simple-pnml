@@ -7,7 +7,7 @@ import java.util.Map;
 import org.processmining.framework.util.Pair;
 import org.processmining.models.connections.GraphLayoutConnection;
 import org.processmining.models.graphbased.AbstractGraphElement;
-//import org.processmining.models.graphbased.directed.opennet.OpenNet;
+import org.processmining.models.graphbased.directed.opennet.OpenNet;
 import org.processmining.models.graphbased.directed.petrinet.PetrinetEdge;
 import org.processmining.models.graphbased.directed.petrinet.PetrinetNode;
 import org.processmining.models.graphbased.directed.petrinet.elements.ExpandableSubNet;
@@ -27,6 +27,10 @@ import org.xmlpull.v1.XmlPullParser;
  *         Contains prots, a net, and final markings for the Open net. Note that
  *         only a single net is expected. In case of multiple nets, the last net
  *         will be used.
+ */
+/**
+ * @author hverbeek
+ * 
  */
 public class PnmlModule extends PnmlElement {
 
@@ -119,81 +123,81 @@ public class PnmlModule extends PnmlElement {
 		return s;
 	}
 
-//	/**
-//	 * Converts the PNML module into an Open net.
-//	 * 
-//	 * @param openNet
-//	 *            The Open net to store the results in.
-//	 * @param marking
-//	 *            The marking to store the inital marking in.
-//	 * @param pnml
-//	 *            The Pnml handler.
-//	 */
-//	public void convertToOpenNet(OpenNet openNet, Marking marking, Pnml pnml, GraphLayoutConnection layout) {
-//		/*
-//		 * Convert all ports.
-//		 */
-//		if (ports != null) {
-//			ports.convertToOpenNet(openNet);
-//		}
-//		/*
-//		 * Convert the net.
-//		 */
-//		Map<String, Place> placeMap = new HashMap<String, Place>();
-//		Map<String, Transition> transitionMap = new HashMap<String, Transition>();
-//		Map<String, PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode>> edgeMap = new HashMap<String, PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode>>();
-//		if (net != null) {
-//			net.convertToNet(openNet, marking, new HashSet<Marking>(), placeMap, transitionMap, edgeMap, layout);
-//		}
-//		/*
-//		 * Convert all final markings.
-//		 */
-//		if (finalMarkings != null) {
-//			finalMarkings.convertToOpenNet(openNet, placeMap);
-//		}
-//		/*
-//		 * Check whether we need to do an auto-layout. If all nodes have a
-//		 * proper position, then we do not need an auto-layout.
-//		 */
-//		pnml.setLayout(openNet, layout);
-//	}
-//
-//	/**
-//	 * Converts the given Open net with the given initial marking into a Pnml
-//	 * module. Typically, this conversion is done to export the Open net and
-//	 * marking to PNML file lateron.
-//	 * 
-//	 * @param openNet
-//	 *            The given Open net.
-//	 * @param marking
-//	 *            The initial marking of the given Open net.
-//	 * @return The Pnml module.
-//	 */
-//	public PnmlModule convertFromOpenNet(OpenNet openNet, Marking marking, Map<String, AbstractGraphElement> idMap,
-//			GraphLayoutConnection layout) {
-//		/*
-//		 * Create an (initial) map from some node in some subnet to a unique id.
-//		 */
-//		Map<Pair<AbstractGraphElement, ExpandableSubNet>, String> map = new HashMap<Pair<AbstractGraphElement, ExpandableSubNet>, String>();
-//		/*
-//		 * Convert all ports. Port nodes will be added to the map.
-//		 */
-//		ports = factory.createPnmlPorts();
-//		ports.convertFromOpenNet(openNet.getInterface(), map);
-//		/*
-//		 * Convert the net. Petri net nodes will be added to the map. Port nodes
-//		 * will be checked for their id's.
-//		 */
-//		net = factory.createPnmlNet();
-//		net.convertFromNet(openNet, marking, new HashSet<Marking>(), map, 1, idMap, layout);
-//		/*
-//		 * Convert the final markings. Places will be checked for their id's
-//		 * using the map.
-//		 */
-//		finalMarkings = factory.createPnmlFinalMarkings();
-//		finalMarkings.convertFromOpenNet(openNet.getPlaces(), openNet.getFinalMarkings(), map);
-//		return this;
-//	}
+	/**
+	 * Converts the PNML module into an Open net.
+	 * 
+	 * @param openNet
+	 *            The Open net to store the results in.
+	 * @param marking
+	 *            The marking to store the inital marking in.
+	 * @param pnml
+	 *            The Pnml handler.
+	 */
+	public void convertToOpenNet(OpenNet openNet, Marking marking, Pnml pnml, GraphLayoutConnection layout) {
+		/*
+		 * Convert all ports.
+		 */
+		if (ports != null) {
+			ports.convertToOpenNet(openNet);
+		}
+		/*
+		 * Convert the net.
+		 */
+		Map<String, Place> placeMap = new HashMap<String, Place>();
+		Map<String, Transition> transitionMap = new HashMap<String, Transition>();
+		Map<String, PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode>> edgeMap = new HashMap<String, PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode>>();
+		if (net != null) {
+			net.convertToNet(openNet, marking, new HashSet<Marking>(), placeMap, transitionMap, edgeMap, layout);
+		}
+		/*
+		 * Convert all final markings.
+		 */
+		if (finalMarkings != null) {
+			finalMarkings.convertToOpenNet(openNet, placeMap);
+		}
+		/*
+		 * Check whether we need to do an auto-layout. If all nodes have a
+		 * proper position, then we do not need an auto-layout.
+		 */
+		pnml.setLayout(openNet, layout);
+	}
+
+	/**
+	 * Converts the given Open net with the given initial marking into a Pnml
+	 * module. Typically, this conversion is done to export the Open net and
+	 * marking to PNML file lateron.
+	 * 
+	 * @param openNet
+	 *            The given Open net.
+	 * @param marking
+	 *            The initial marking of the given Open net.
+	 * @return The Pnml module.
+	 */
+	public PnmlModule convertFromOpenNet(OpenNet openNet, Marking marking, Map<String, AbstractGraphElement> idMap,
+			GraphLayoutConnection layout) {
+		/*
+		 * Create an (initial) map from some node in some subnet to a unique id.
+		 */
+		Map<Pair<AbstractGraphElement, ExpandableSubNet>, String> map = new HashMap<Pair<AbstractGraphElement, ExpandableSubNet>, String>();
+		/*
+		 * Convert all ports. Port nodes will be added to the map.
+		 */
+		ports = factory.createPnmlPorts();
+		ports.convertFromOpenNet(openNet.getInterface(), map);
+		/*
+		 * Convert the net. Petri net nodes will be added to the map. Port nodes
+		 * will be checked for their id's.
+		 */
+		net = factory.createPnmlNet();
+		net.convertFromNet(openNet, marking, new HashSet<Marking>(), map, 1, idMap, layout);
+		/*
+		 * Convert the final markings. Places will be checked for their id's
+		 * using the map.
+		 */
+		finalMarkings = factory.createPnmlFinalMarkings();
+		finalMarkings.convertFromOpenNet(openNet.getPlaces(), openNet.getFinalMarkings(), map);
+		return this;
+	}
 
 	public void setName(String name) {
 		if (net != null) {

@@ -8,9 +8,9 @@ import java.util.Map;
 import org.processmining.framework.util.Pair;
 import org.processmining.models.connections.GraphLayoutConnection;
 import org.processmining.models.graphbased.AbstractGraphElement;
-//import org.processmining.models.graphbased.directed.opennet.OpenNet;
-//import org.processmining.models.graphbased.directed.opennet.OpenNetLabel;
-//import org.processmining.models.graphbased.directed.opennet.OpenNetLabel.Type;
+import org.processmining.models.graphbased.directed.opennet.OpenNet;
+import org.processmining.models.graphbased.directed.opennet.OpenNetLabel;
+import org.processmining.models.graphbased.directed.opennet.OpenNetLabel.Type;
 import org.processmining.models.graphbased.directed.petrinet.PetrinetGraph;
 import org.processmining.models.graphbased.directed.petrinet.elements.ExpandableSubNet;
 import org.processmining.models.graphbased.directed.petrinet.elements.Transition;
@@ -130,7 +130,7 @@ public class PnmlTransition extends PnmlNode {
 		 * If Open net, then handle Open net edges.
 		 */
 
-		/*if (net instanceof OpenNet) {
+		if (net instanceof OpenNet) {
 			OpenNet onet = (OpenNet) net;
 			for (PnmlLabelConnection.Receive receive : receiveList) {
 				receive.convertToOpenNet(onet, transition);
@@ -141,7 +141,7 @@ public class PnmlTransition extends PnmlNode {
 			for (PnmlLabelConnection.Sync sync : syncList) {
 				sync.convertToOpenNet(onet, transition);
 			}
-		}*/
+		}
 	}
 
 	public PnmlTransition convertFromNet(PetrinetGraph net, ExpandableSubNet parent, Transition element,
@@ -154,7 +154,7 @@ public class PnmlTransition extends PnmlNode {
 		/*
 		 * Check for any Open net edges and handle them properly.
 		 */
-		/*if (net instanceof OpenNet) {
+		if (net instanceof OpenNet) {
 			OpenNet oNet = (OpenNet) net;
 			for (OpenNetLabel label : oNet.getLabelsFor(element)) {
 				if (label.getType().equals(Type.ASYNC_INPUT)) {
@@ -172,7 +172,7 @@ public class PnmlTransition extends PnmlNode {
 				}
 
 			}
-		}*/
+		}
 		return this;
 	}
 

@@ -4,9 +4,9 @@ import java.util.Map;
 
 import org.processmining.framework.util.Pair;
 import org.processmining.models.graphbased.AbstractGraphElement;
-//import org.processmining.models.graphbased.directed.opennet.OpenNetLabel;
-//import org.processmining.models.graphbased.directed.opennet.OpenNetLabel.Type;
-//import org.processmining.models.graphbased.directed.opennet.OpenNetPort;
+import org.processmining.models.graphbased.directed.opennet.OpenNetLabel;
+import org.processmining.models.graphbased.directed.opennet.OpenNetLabel.Type;
+import org.processmining.models.graphbased.directed.opennet.OpenNetPort;
 import org.processmining.models.graphbased.directed.petrinet.elements.ExpandableSubNet;
 import org.processmining.plugins.pnml.elements.PnmlNode;
 
@@ -16,20 +16,20 @@ public abstract class PnmlLabel extends PnmlNode {
 		super(tag);
 	}
 
-//	public void convertToOpenNet(OpenNetPort port) {
-//		OpenNetLabel sync = new OpenNetLabel((((name != null) && (name.text != null)) ? name.text.getText() : id), id,
-//				getType());
-//		port.add(sync);
-//
-//	}
+	public void convertToOpenNet(OpenNetPort port) {
+		OpenNetLabel sync = new OpenNetLabel((((name != null) && (name.text != null)) ? name.text.getText() : id), id,
+				getType());
+		port.add(sync);
 
-//	protected abstract Type getType();
+	}
 
-//	public PnmlLabel convertFromOpenNet(OpenNetLabel sync, Map<Pair<AbstractGraphElement, ExpandableSubNet>, String> map) {
-//		name = factory.createPnmlName(sync.getLabel());
-//		id = sync.getId();
-//		return this;
-//	}
+	protected abstract Type getType();
+
+	public PnmlLabel convertFromOpenNet(OpenNetLabel sync, Map<Pair<AbstractGraphElement, ExpandableSubNet>, String> map) {
+		name = factory.createPnmlName(sync.getLabel());
+		id = sync.getId();
+		return this;
+	}
 
 	public final static class Input extends PnmlLabel {
 		public final static String TAG = "input";
@@ -38,9 +38,9 @@ public abstract class PnmlLabel extends PnmlNode {
 			super(TAG);
 		}
 
-//		protected Type getType() {
-//			return Type.ASYNC_INPUT;
-//		}
+		protected Type getType() {
+			return Type.ASYNC_INPUT;
+		}
 
 	}
 
@@ -51,9 +51,9 @@ public abstract class PnmlLabel extends PnmlNode {
 			super(TAG);
 		}
 
-//		protected Type getType() {
-//			return Type.ASYNC_OUTPUT;
-//		}
+		protected Type getType() {
+			return Type.ASYNC_OUTPUT;
+		}
 
 	}
 
@@ -64,9 +64,9 @@ public abstract class PnmlLabel extends PnmlNode {
 			super(TAG);
 		}
 
-//		protected Type getType() {
-//			return Type.SYNC;
-//		}
+		protected Type getType() {
+			return Type.SYNC;
+		}
 
 	}
 }

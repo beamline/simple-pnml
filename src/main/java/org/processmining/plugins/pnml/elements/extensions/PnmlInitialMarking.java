@@ -56,7 +56,7 @@ public class PnmlInitialMarking extends PnmlAnnotation {
 		 */
 		int value = Integer.valueOf(text.getText());
 		if (value < 0) {
-//			pnml.log(tag, lineNumber, "Expected non-negative integer");
+			pnml.log(tag, lineNumber, "Expected non-negative integer");
 		}
 	}
 

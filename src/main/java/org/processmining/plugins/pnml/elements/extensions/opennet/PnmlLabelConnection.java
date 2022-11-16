@@ -4,8 +4,8 @@ import java.util.Map;
 
 import org.processmining.framework.util.Pair;
 import org.processmining.models.graphbased.AbstractGraphElement;
-//import org.processmining.models.graphbased.directed.opennet.OpenNet;
-//import org.processmining.models.graphbased.directed.opennet.OpenNetLabel;
+import org.processmining.models.graphbased.directed.opennet.OpenNet;
+import org.processmining.models.graphbased.directed.opennet.OpenNetLabel;
 import org.processmining.models.graphbased.directed.petrinet.elements.ExpandableSubNet;
 import org.processmining.models.graphbased.directed.petrinet.elements.Transition;
 import org.processmining.plugins.pnml.base.Pnml;
@@ -40,15 +40,15 @@ public abstract class PnmlLabelConnection extends PnmlElement {
 		return s;
 	}
 
-//	public void convertToOpenNet(OpenNet net, Transition transition) {
-//		net.addConnection(transition, net.getInterface().findLabel(idRef));
-//	}
-//
-//	public PnmlLabelConnection convertFromOpenNet(OpenNetLabel label,
-//			Map<Pair<AbstractGraphElement, ExpandableSubNet>, String> map) {
-//		idRef = label.getId();
-//		return this;
-//	}
+	public void convertToOpenNet(OpenNet net, Transition transition) {
+		net.addConnection(transition, net.getInterface().findLabel(idRef));
+	}
+
+	public PnmlLabelConnection convertFromOpenNet(OpenNetLabel label,
+			Map<Pair<AbstractGraphElement, ExpandableSubNet>, String> map) {
+		idRef = label.getId();
+		return this;
+	}
 
 	public static class Receive extends PnmlLabelConnection {
 		public final static String TAG = "receive";

@@ -167,9 +167,9 @@ public class PnmlPosition extends PnmlElement {
 			Pair<Point2D.Double, Point2D.Double> boundingBox, GraphLayoutConnection layout) {
 		if (hasX && hasY) {
 			//			System.err.println(subNet.getLabel() + ", " + element.getLabel() + ": " + displacement + ", " + boundingBox);
-//			layout.setPosition(element,
-//					new Point2D.Double(boundingBox.getFirst().x + displacement.x, boundingBox.getFirst().y
-//							+ displacement.y));
+			layout.setPosition(element,
+					new Point2D.Double(boundingBox.getFirst().x + displacement.x, boundingBox.getFirst().y
+							+ displacement.y));
 		}
 	}
 

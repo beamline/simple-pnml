@@ -2,9 +2,11 @@ package org.processmining.models.graphbased.directed.petrinet.impl;
 
 import javax.swing.SwingConstants;
 
+import org.processmining.framework.providedobjects.SubstitutionType;
 import org.processmining.models.graphbased.AttributeMap;
 import org.processmining.models.graphbased.directed.petrinet.Petrinet;
 
+@SubstitutionType(substitutedType = Petrinet.class)
 public class PetrinetImpl extends AbstractResetInhibitorNet implements Petrinet {
 
 	public PetrinetImpl(String label) {

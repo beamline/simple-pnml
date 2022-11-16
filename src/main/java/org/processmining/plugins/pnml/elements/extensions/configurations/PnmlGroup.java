@@ -8,10 +8,10 @@ import org.processmining.models.graphbased.AbstractGraphElement;
 import org.processmining.models.graphbased.directed.petrinet.PetrinetEdge;
 import org.processmining.models.graphbased.directed.petrinet.PetrinetGraph;
 import org.processmining.models.graphbased.directed.petrinet.PetrinetNode;
-//import org.processmining.models.graphbased.directed.petrinet.configurable.ConfigurableFeature;
-//import org.processmining.models.graphbased.directed.petrinet.configurable.ConfigurableFeatureGroup;
-//import org.processmining.models.graphbased.directed.petrinet.configurable.InvalidConfigurationException;
-//import org.processmining.models.graphbased.directed.petrinet.configurable.impl.ConfigurableResetInhibitorNet;
+import org.processmining.models.graphbased.directed.petrinet.configurable.ConfigurableFeature;
+import org.processmining.models.graphbased.directed.petrinet.configurable.ConfigurableFeatureGroup;
+import org.processmining.models.graphbased.directed.petrinet.configurable.InvalidConfigurationException;
+import org.processmining.models.graphbased.directed.petrinet.configurable.impl.ConfigurableResetInhibitorNet;
 import org.processmining.models.graphbased.directed.petrinet.elements.Place;
 import org.processmining.models.graphbased.directed.petrinet.elements.Transition;
 import org.processmining.plugins.pnml.base.Pnml;
@@ -80,29 +80,29 @@ public class PnmlGroup extends PnmlElement {
 		return s;
 	}
 
-//	public void convertToNet(PetrinetGraph net, Map<String, Place> placeMap, Map<String, Transition> transitionMap,
-//			Map<String, PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode>> edgeMap) {
-//		ConfigurableFeatureGroup group = new ConfigurableFeatureGroup(id);
-//		for (PnmlFeature feature : features) {
-//			feature.convertToNet(net, group, placeMap, transitionMap, edgeMap);
-//		}
-//		if (net instanceof ConfigurableResetInhibitorNet) {
-//			ConfigurableResetInhibitorNet configurableNet = (ConfigurableResetInhibitorNet) net;
-//			try {
-//				configurableNet.addConfigurableFeatures(group);
-//			} catch (InvalidConfigurationException e) {
-//				e.printStackTrace();
-//			}
-//		}
-//	}
-//	
-//	public PnmlGroup convertFromNet(ConfigurableFeatureGroup group, Map<AbstractGraphElement, String> map) {
-//		id = group.getId();
-//		for (ConfigurableFeature<?, ?> feature : group.getFeatures()) {
-//			PnmlFeature pnmlFeature = factory.createPnmlFeature();
-//			pnmlFeature.convertFromNet(feature, map);
-//			features.add(pnmlFeature);
-//		}
-//		return this;
-//	}
+	public void convertToNet(PetrinetGraph net, Map<String, Place> placeMap, Map<String, Transition> transitionMap,
+			Map<String, PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode>> edgeMap) {
+		ConfigurableFeatureGroup group = new ConfigurableFeatureGroup(id);
+		for (PnmlFeature feature : features) {
+			feature.convertToNet(net, group, placeMap, transitionMap, edgeMap);
+		}
+		if (net instanceof ConfigurableResetInhibitorNet) {
+			ConfigurableResetInhibitorNet configurableNet = (ConfigurableResetInhibitorNet) net;
+			try {
+				configurableNet.addConfigurableFeatures(group);
+			} catch (InvalidConfigurationException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public PnmlGroup convertFromNet(ConfigurableFeatureGroup group, Map<AbstractGraphElement, String> map) {
+		id = group.getId();
+		for (ConfigurableFeature<?, ?> feature : group.getFeatures()) {
+			PnmlFeature pnmlFeature = factory.createPnmlFeature();
+			pnmlFeature.convertFromNet(feature, map);
+			features.add(pnmlFeature);
+		}
+		return this;
+	}
 }

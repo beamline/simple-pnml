@@ -3,18 +3,17 @@ package org.processmining.plugins.pnml.elements;
 import java.awt.geom.Point2D;
 import java.util.Map;
 
-//import org.jgraph.graph.GraphConstants;
 import org.processmining.framework.util.Pair;
 import org.processmining.models.connections.GraphLayoutConnection;
 import org.processmining.models.graphbased.AbstractGraphElement;
 import org.processmining.models.graphbased.AttributeMap;
 import org.processmining.models.graphbased.directed.DirectedGraphElement;
-//import org.processmining.models.graphbased.directed.petrinet.InhibitorNet;
+import org.processmining.models.graphbased.directed.petrinet.InhibitorNet;
 import org.processmining.models.graphbased.directed.petrinet.PetrinetEdge;
 import org.processmining.models.graphbased.directed.petrinet.PetrinetGraph;
 import org.processmining.models.graphbased.directed.petrinet.PetrinetNode;
-//import org.processmining.models.graphbased.directed.petrinet.ResetInhibitorNet;
-//import org.processmining.models.graphbased.directed.petrinet.ResetNet;
+import org.processmining.models.graphbased.directed.petrinet.ResetInhibitorNet;
+import org.processmining.models.graphbased.directed.petrinet.ResetNet;
 import org.processmining.models.graphbased.directed.petrinet.elements.Arc;
 import org.processmining.models.graphbased.directed.petrinet.elements.ExpandableSubNet;
 import org.processmining.models.graphbased.directed.petrinet.elements.InhibitorArc;
@@ -290,7 +289,7 @@ public class PnmlArc extends PnmlBasicObject {
 			if ((arcType == null) || arcType.isNormal()) {
 				arc = net.addArc(placeMap.get(source), transitionMap.get(target), weight,
 						firstCommonAncestor(sourceSubNet, targetSubNet));
-			} /*else if (arcType.isInhibitor() && (net instanceof InhibitorNet)) {
+			} else if (arcType.isInhibitor() && (net instanceof InhibitorNet)) {
 				arc = ((InhibitorNet) net).addInhibitorArc(placeMap.get(source), transitionMap.get(target),
 						firstCommonAncestor(sourceSubNet, targetSubNet));
 			} else if (arcType.isInhibitor() && (net instanceof ResetInhibitorNet)) {
@@ -302,14 +301,14 @@ public class PnmlArc extends PnmlBasicObject {
 			} else if (arcType.isReset() && (net instanceof ResetInhibitorNet)) {
 				arc = ((ResetInhibitorNet) net).addResetArc(placeMap.get(source), transitionMap.get(target),
 						firstCommonAncestor(sourceSubNet, targetSubNet));
-			}*/
+			}
 		} else if (transitionMap.containsKey(source) && placeMap.containsKey(target)) {
 			ExpandableSubNet sourceSubNet = transitionMap.get(source).getParent();
 			ExpandableSubNet targetSubNet = placeMap.get(target).getParent();
 			if ((arcType == null) || arcType.isNormal()) {
 				arc = net.addArc(transitionMap.get(source), placeMap.get(target), weight,
 						firstCommonAncestor(sourceSubNet, targetSubNet));
-			} /*else if (arcType.isInhibitor() && (net instanceof InhibitorNet)) {
+			} else if (arcType.isInhibitor() && (net instanceof InhibitorNet)) {
 				arc = ((InhibitorNet) net).addInhibitorArc(placeMap.get(target), transitionMap.get(source),
 						firstCommonAncestor(sourceSubNet, targetSubNet));
 			} else if (arcType.isInhibitor() && (net instanceof ResetInhibitorNet)) {
@@ -321,7 +320,7 @@ public class PnmlArc extends PnmlBasicObject {
 			} else if (arcType.isReset() && (net instanceof ResetInhibitorNet)) {
 				arc = ((ResetInhibitorNet) net).addResetArc(placeMap.get(target), transitionMap.get(source),
 						firstCommonAncestor(sourceSubNet, targetSubNet));
-			}*/
+			}
 		}
 		/*
 		 * If arc created, set graphics and inscription.

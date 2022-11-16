@@ -2,9 +2,9 @@ package org.processmining.plugins.pnml.elements.extensions.configurations;
 
 import java.util.List;
 
-//import org.processmining.models.graphbased.directed.petrinet.configurable.ConfigurableParameter;
-//import org.processmining.models.graphbased.directed.petrinet.configurable.InvalidConfigurationException;
-//import org.processmining.models.graphbased.directed.petrinet.configurable.impl.ConfigurableParameterInteger;
+import org.processmining.models.graphbased.directed.petrinet.configurable.ConfigurableParameter;
+import org.processmining.models.graphbased.directed.petrinet.configurable.InvalidConfigurationException;
+import org.processmining.models.graphbased.directed.petrinet.configurable.impl.ConfigurableParameterInteger;
 import org.processmining.plugins.pnml.base.Pnml;
 import org.processmining.plugins.pnml.base.PnmlElement;
 import org.xmlpull.v1.XmlPullParser;
@@ -116,28 +116,28 @@ public class PnmlParameter extends PnmlElement {
 		return "";
 	}
 
-//	public void convertToNet(List<ConfigurableParameter<Integer>> parameterList) {
-//		try {
-//			int min = Integer.parseInt(minVal);
-//			int max = Integer.parseInt(maxVal);
-//			int def = Integer.parseInt(defaultVal);
-//			ConfigurableParameterInteger parameter = new ConfigurableParameterInteger(name, min, max, def);
-//			parameterList.add(parameter);
-//			// TODO Connect parameter to arc
-//		} catch (NumberFormatException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (InvalidConfigurationException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	}
-//
-//	public PnmlParameter convertFromNet(ConfigurableParameter<Integer> parameter) {
-//		name = new String(parameter.getId());
-//		minVal = String.valueOf(parameter.getIntervalMin());
-//		maxVal = String.valueOf(parameter.getIntervalMax());
-//		defaultVal = String.valueOf(parameter.getValue());
-//		return this;
-//	}
+	public void convertToNet(List<ConfigurableParameter<Integer>> parameterList) {
+		try {
+			int min = Integer.parseInt(minVal);
+			int max = Integer.parseInt(maxVal);
+			int def = Integer.parseInt(defaultVal);
+			ConfigurableParameterInteger parameter = new ConfigurableParameterInteger(name, min, max, def);
+			parameterList.add(parameter);
+			// TODO Connect parameter to arc
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvalidConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public PnmlParameter convertFromNet(ConfigurableParameter<Integer> parameter) {
+		name = new String(parameter.getId());
+		minVal = String.valueOf(parameter.getIntervalMin());
+		maxVal = String.valueOf(parameter.getIntervalMax());
+		defaultVal = String.valueOf(parameter.getValue());
+		return this;
+	}
 }

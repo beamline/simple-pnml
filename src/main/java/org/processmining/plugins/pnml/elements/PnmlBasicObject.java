@@ -26,7 +26,7 @@ public abstract class PnmlBasicObject extends PnmlElement {
 	 * ToolSpecifics elements (there may be multiple).
 	 */
 	protected List<PnmlToolSpecific> toolSpecificList;
-
+	
 	/**
 	 * Creates a fresh basic PNML object.
 	 * 

@@ -272,7 +272,7 @@ public class PnmlNet extends PnmlBasicObject {
 		 * Convert all final markings.
 		 */
 		if (finalMarkings != null) {
-//			finalMarkings.convertToNet(net, placeMap, netFinalMarkings);
+			finalMarkings.convertToNet(net, placeMap, netFinalMarkings);
 		}
 	}
 
@@ -303,7 +303,7 @@ public class PnmlNet extends PnmlBasicObject {
 		 * using the map.
 		 */
 		finalMarkings = factory.createPnmlFinalMarkings();
-//		finalMarkings.convertFromOpenNet(net.getPlaces(), netFinalMarkings, idMap);
+		finalMarkings.convertFromOpenNet(net.getPlaces(), netFinalMarkings, idMap);
 		return this;
 	}
 

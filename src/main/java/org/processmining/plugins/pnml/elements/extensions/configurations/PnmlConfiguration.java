@@ -8,8 +8,8 @@ import org.processmining.models.graphbased.AbstractGraphElement;
 import org.processmining.models.graphbased.directed.petrinet.PetrinetEdge;
 import org.processmining.models.graphbased.directed.petrinet.PetrinetGraph;
 import org.processmining.models.graphbased.directed.petrinet.PetrinetNode;
-//import org.processmining.models.graphbased.directed.petrinet.configurable.ConfigurableFeatureGroup;
-//import org.processmining.models.graphbased.directed.petrinet.configurable.impl.ConfigurableResetInhibitorNet;
+import org.processmining.models.graphbased.directed.petrinet.configurable.ConfigurableFeatureGroup;
+import org.processmining.models.graphbased.directed.petrinet.configurable.impl.ConfigurableResetInhibitorNet;
 import org.processmining.models.graphbased.directed.petrinet.elements.Place;
 import org.processmining.models.graphbased.directed.petrinet.elements.Transition;
 import org.processmining.plugins.pnml.base.Pnml;
@@ -52,20 +52,20 @@ public class PnmlConfiguration extends PnmlElement {
 		return s;
 	}
 
-//	public void convertToNet(PetrinetGraph net, Map<String, Place> placeMap, Map<String, Transition> transitionMap,
-//			Map<String, PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode>> edgeMap) {
-//		for (PnmlGroup group : groups) {
-//			group.convertToNet(net, placeMap, transitionMap, edgeMap);
-//		}
-//	}
+	public void convertToNet(PetrinetGraph net, Map<String, Place> placeMap, Map<String, Transition> transitionMap,
+			Map<String, PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode>> edgeMap) {
+		for (PnmlGroup group : groups) {
+			group.convertToNet(net, placeMap, transitionMap, edgeMap);
+		}
+	}
 	
-//	public PnmlConfiguration convertFromNet(ConfigurableResetInhibitorNet net, Map<AbstractGraphElement, String> map) {
-//		for (ConfigurableFeatureGroup group : net.getConfigurableFeatureGroups()) {
-//			PnmlGroup pnmlGroup = factory.createPnmlGroup();
-//			pnmlGroup.convertFromNet(group, map);
-//			groups.add(pnmlGroup);
-//		}
-//		return this;
-//	}
+	public PnmlConfiguration convertFromNet(ConfigurableResetInhibitorNet net, Map<AbstractGraphElement, String> map) {
+		for (ConfigurableFeatureGroup group : net.getConfigurableFeatureGroups()) {
+			PnmlGroup pnmlGroup = factory.createPnmlGroup();
+			pnmlGroup.convertFromNet(group, map);
+			groups.add(pnmlGroup);
+		}
+		return this;
+	}
 
 }

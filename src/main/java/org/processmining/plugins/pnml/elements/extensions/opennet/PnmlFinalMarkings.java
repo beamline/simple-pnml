@@ -7,7 +7,7 @@ import java.util.Map;
 
 import org.processmining.framework.util.Pair;
 import org.processmining.models.graphbased.AbstractGraphElement;
-//import org.processmining.models.graphbased.directed.opennet.OpenNet;
+import org.processmining.models.graphbased.directed.opennet.OpenNet;
 import org.processmining.models.graphbased.directed.petrinet.PetrinetGraph;
 import org.processmining.models.graphbased.directed.petrinet.elements.ExpandableSubNet;
 import org.processmining.models.graphbased.directed.petrinet.elements.Place;
@@ -53,25 +53,25 @@ public class PnmlFinalMarkings extends PnmlElement {
 		return s;
 	}
 
-//	public void convertToOpenNet(OpenNet openNet, Map<String, Place> placeMap) {
-//		for (PnmlFinalMarking finalMarking : finalMarkingList) {
-//			finalMarking.convertToOpenNet(openNet, placeMap);
-//		}
-//	}
-//
-//	public void convertToNet(PetrinetGraph net, Map<String, Place> placeMap, Collection<Marking> finalMarkings) {
-//		for (PnmlFinalMarking finalMarking : finalMarkingList) {
-//			finalMarking.convertToNet(net, placeMap, finalMarkings);
-//		}
-//	}
-//
-//	public PnmlFinalMarkings convertFromOpenNet(Collection<? extends Place> places, Collection<Marking> markings,
-//			Map<Pair<AbstractGraphElement, ExpandableSubNet>, String> map) {
-//		for (Marking marking : markings) {
-//			PnmlFinalMarking finalMarking = factory.createPnmlFinalMarking();
-//			finalMarking.convertFromOpenNet(places, marking, map);
-//			finalMarkingList.add(finalMarking);
-//		}
-//		return this;
-//	}
+	public void convertToOpenNet(OpenNet openNet, Map<String, Place> placeMap) {
+		for (PnmlFinalMarking finalMarking : finalMarkingList) {
+			finalMarking.convertToOpenNet(openNet, placeMap);
+		}
+	}
+
+	public void convertToNet(PetrinetGraph net, Map<String, Place> placeMap, Collection<Marking> finalMarkings) {
+		for (PnmlFinalMarking finalMarking : finalMarkingList) {
+			finalMarking.convertToNet(net, placeMap, finalMarkings);
+		}
+	}
+
+	public PnmlFinalMarkings convertFromOpenNet(Collection<? extends Place> places, Collection<Marking> markings,
+			Map<Pair<AbstractGraphElement, ExpandableSubNet>, String> map) {
+		for (Marking marking : markings) {
+			PnmlFinalMarking finalMarking = factory.createPnmlFinalMarking();
+			finalMarking.convertFromOpenNet(places, marking, map);
+			finalMarkingList.add(finalMarking);
+		}
+		return this;
+	}
 }

@@ -8,11 +8,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
+import org.processmining.framework.util.Pair;
 import org.processmining.models.connections.GraphLayoutConnection;
 import org.processmining.models.graphbased.AbstractGraphElement;
+import org.processmining.models.graphbased.directed.opennet.OpenNet;
 import org.processmining.models.graphbased.directed.petrinet.PetrinetEdge;
 import org.processmining.models.graphbased.directed.petrinet.PetrinetGraph;
 import org.processmining.models.graphbased.directed.petrinet.PetrinetNode;
+import org.processmining.models.graphbased.directed.petrinet.configurable.impl.ConfigurableResetInhibitorNet;
 import org.processmining.models.graphbased.directed.petrinet.elements.ExpandableSubNet;
 import org.processmining.models.graphbased.directed.petrinet.elements.Place;
 import org.processmining.models.graphbased.directed.petrinet.elements.Transition;
@@ -65,10 +68,6 @@ public class Pnml extends PnmlElement {
 //	private XExtension organizationalExtension;
 
 	boolean hasErrors;
-	
-	public List<PnmlNet> getNetList() {
-		return netList;
-	}
 
 	/**
 	 * Creates a fresh PNML object, given the type.
@@ -135,7 +134,7 @@ public class Pnml extends PnmlElement {
 	 * @param message
 	 *            Error message.
 	 */
-	public void log(String context, int lineNumber, String message) { }
+	public void log(String context, int lineNumber, String message) {
 //		XAttributeMap attributeMap = new XAttributeMapImpl();
 //		attributeMap.put(XConceptExtension.KEY_NAME,
 //				xFactory.createAttributeLiteral(XConceptExtension.KEY_NAME, message, conceptExtension));
@@ -146,7 +145,7 @@ public class Pnml extends PnmlElement {
 //		XEvent event = xFactory.createEvent(attributeMap);
 //		trace.add(event);
 //		hasErrors = true;
-//	}
+	}
 
 	/**
 	 * Adds a new trace with the given name to the log. This trace is now
@@ -155,12 +154,12 @@ public class Pnml extends PnmlElement {
 	 * @param name
 	 *            The give name.
 	 */
-	public void logNet(String name) { }
+	public void logNet(String name) {
 //		trace = xFactory.createTrace();
 //		log.add(trace);
 //		trace.getAttributes().put(XConceptExtension.KEY_NAME,
 //				xFactory.createAttributeLiteral(XConceptExtension.KEY_NAME, name, conceptExtension));
-//	}
+	}
 
 	public boolean hasErrors() {
 		return hasErrors;
@@ -253,56 +252,56 @@ public class Pnml extends PnmlElement {
 	 *            Where to store the initial marking in (should be a fresh
 	 *            marking).
 	 */
-	public void convertToNet(PetrinetGraph net, Marking marking) {
-		convertToNet(net, marking, new HashSet<Marking>(), null);
+	public void convertToNet(PetrinetGraph net, Marking marking, GraphLayoutConnection layout) {
+		convertToNet(net, marking, new HashSet<Marking>(), layout);
 	}
 
 	public void convertToNet(PetrinetGraph net, Marking marking, Collection<Marking> finalMarkings,
 			GraphLayoutConnection layout) {
 		synchronized (factory) {
-//			if (net instanceof OpenNet) {
-//				if (module != null) {
-//					module.convertToOpenNet((OpenNet) net, marking, this, layout);
-//				}
-//			} else {
+			if (net instanceof OpenNet) {
+				if (module != null) {
+					module.convertToOpenNet((OpenNet) net, marking, this, layout);
+				}
+			} else {
 				if (!netList.isEmpty()) {
 					Map<String, Place> placeMap = new HashMap<String, Place>();
 					Map<String, Transition> transitionMap = new HashMap<String, Transition>();
 					Map<String, PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode>> edgeMap = new HashMap<String, PetrinetEdge<?, ?>>();
 					netList.get(0).convertToNet(net, marking, finalMarkings, placeMap, transitionMap, edgeMap, layout);
 					setLayout(net, layout);
-//					if (net instanceof ConfigurableResetInhibitorNet && configuration != null) {
-//						configuration.convertToNet(net, placeMap, transitionMap, edgeMap);
-//					}
+					if (net instanceof ConfigurableResetInhibitorNet && configuration != null) {
+						configuration.convertToNet(net, placeMap, transitionMap, edgeMap);
+					}
 				}
-//			}
+			}
 		}
 	}
 
 	public void setLayout(PetrinetGraph net, GraphLayoutConnection layout) {
-//		boolean doLayout = false;
-//		/*
-//		 * If any node has no position, then we need to layout the graph.
-//		 */
-//		for (PetrinetNode node : net.getNodes()) {
-//			if (layout.getPosition(node) == null) {
-//				doLayout = true;
-//			}
-//		}
-//		if (!doLayout) {
-//			/*
-//			 * All nodes have position (10.0,10.0) (which is the default
-//			 * position) we need to layout as well.
-//			 */
-//			doLayout = true;
-//			for (PetrinetNode node : net.getNodes()) {
-//				Point2D position = layout.getPosition(node);
-//				if ((position.getX() != 10.0) || (position.getY() != 10.0)) {
-//					doLayout = false;
-//				}
-//			}
-//		}
-//		layout.setLayedOut(!doLayout);
+		boolean doLayout = false;
+		/*
+		 * If any node has no position, then we need to layout the graph.
+		 */
+		for (PetrinetNode node : net.getNodes()) {
+			if (layout.getPosition(node) == null) {
+				doLayout = true;
+			}
+		}
+		if (!doLayout) {
+			/*
+			 * All nodes have position (10.0,10.0) (which is the default
+			 * position) we need to layout as well.
+			 */
+			doLayout = true;
+			for (PetrinetNode node : net.getNodes()) {
+				Point2D position = layout.getPosition(node);
+				if ((position.getX() != 10.0) || (position.getY() != 10.0)) {
+					doLayout = false;
+				}
+			}
+		}
+		layout.setLayedOut(!doLayout);
 	}
 
 	public String getLabel() {
@@ -314,77 +313,77 @@ public class Pnml extends PnmlElement {
 		return "Empty net";
 	}
 
-//	public Pnml convertFromNet(Map<PetrinetGraph, Marking> markedNets, GraphLayoutConnection layout) {
-//		Map<PetrinetGraph, Collection<Marking>> finalMarkedNets = new HashMap<PetrinetGraph, Collection<Marking>>();
-//		for (PetrinetGraph net : markedNets.keySet()) {
-//			finalMarkedNets.put(net, new HashSet<Marking>());
-//		}
-//		return convertFromNet(markedNets, finalMarkedNets, layout);
-//	}
+	public Pnml convertFromNet(Map<PetrinetGraph, Marking> markedNets, GraphLayoutConnection layout) {
+		Map<PetrinetGraph, Collection<Marking>> finalMarkedNets = new HashMap<PetrinetGraph, Collection<Marking>>();
+		for (PetrinetGraph net : markedNets.keySet()) {
+			finalMarkedNets.put(net, new HashSet<Marking>());
+		}
+		return convertFromNet(markedNets, finalMarkedNets, layout);
+	}
 
-//	public Pnml convertFromNet(Map<PetrinetGraph, Marking> markedNets,
-//			Map<PetrinetGraph, Collection<Marking>> finalMarkedNets, GraphLayoutConnection layout) {
-//		synchronized (factory) {
-//			netList = new ArrayList<PnmlNet>();
-//			int netCtr = 1;
-//			Map<Pair<AbstractGraphElement, ExpandableSubNet>, String> map = new HashMap<Pair<AbstractGraphElement, ExpandableSubNet>, String>();
-//			for (PetrinetGraph net : markedNets.keySet()) {
-//
-//				netList.add(factory.createPnmlNet().convertFromNet(net, markedNets.get(net), finalMarkedNets.get(net),
-//						map, netCtr++, layout));
-//			}
-//			Map<AbstractGraphElement, String> idMap = new HashMap<AbstractGraphElement, String>();
-//			for (Pair<AbstractGraphElement, ExpandableSubNet> pair : map.keySet()) {
-//				idMap.put(pair.getFirst(), map.get(pair));
-//			}
-//			if (markedNets.keySet().size() == 1
-//					&& markedNets.keySet().iterator().next() instanceof ConfigurableResetInhibitorNet) {
-//				ConfigurableResetInhibitorNet configurableNet = (ConfigurableResetInhibitorNet) markedNets.keySet()
-//						.iterator().next();
-//				configuration = factory.createPnmlConfiguration();
-//				configuration.convertFromNet(configurableNet, idMap);
-//			}
-//			return this;
-//		}
-//	}
+	public Pnml convertFromNet(Map<PetrinetGraph, Marking> markedNets,
+			Map<PetrinetGraph, Collection<Marking>> finalMarkedNets, GraphLayoutConnection layout) {
+		synchronized (factory) {
+			netList = new ArrayList<PnmlNet>();
+			int netCtr = 1;
+			Map<Pair<AbstractGraphElement, ExpandableSubNet>, String> map = new HashMap<Pair<AbstractGraphElement, ExpandableSubNet>, String>();
+			for (PetrinetGraph net : markedNets.keySet()) {
 
-//	public Pnml convertFromNet(PetrinetGraph net, Marking marking, GraphLayoutConnection layout) {
-//		return convertFromNet(net, marking, new HashSet<Marking>(), layout);
-//	}
+				netList.add(factory.createPnmlNet().convertFromNet(net, markedNets.get(net), finalMarkedNets.get(net),
+						map, netCtr++, layout));
+			}
+			Map<AbstractGraphElement, String> idMap = new HashMap<AbstractGraphElement, String>();
+			for (Pair<AbstractGraphElement, ExpandableSubNet> pair : map.keySet()) {
+				idMap.put(pair.getFirst(), map.get(pair));
+			}
+			if (markedNets.keySet().size() == 1
+					&& markedNets.keySet().iterator().next() instanceof ConfigurableResetInhibitorNet) {
+				ConfigurableResetInhibitorNet configurableNet = (ConfigurableResetInhibitorNet) markedNets.keySet()
+						.iterator().next();
+				configuration = factory.createPnmlConfiguration();
+				configuration.convertFromNet(configurableNet, idMap);
+			}
+			return this;
+		}
+	}
 
-//	public Pnml convertFromNet(PetrinetGraph net, Marking marking, Collection<Marking> finalMarkings,
-//			GraphLayoutConnection layout) {
-//		Map<String, AbstractGraphElement> idMap = new HashMap<String, AbstractGraphElement>();
-//		return convertFromNet(net, marking, finalMarkings, idMap, layout);
-//	}
+	public Pnml convertFromNet(PetrinetGraph net, Marking marking, GraphLayoutConnection layout) {
+		return convertFromNet(net, marking, new HashSet<Marking>(), layout);
+	}
 
-//	public Pnml convertFromNet(PetrinetGraph net, Marking marking, Map<String, AbstractGraphElement> idMap,
-//			GraphLayoutConnection layout) {
-//		return convertFromNet(net, marking, new HashSet<Marking>(), idMap, layout);
-//	}
+	public Pnml convertFromNet(PetrinetGraph net, Marking marking, Collection<Marking> finalMarkings,
+			GraphLayoutConnection layout) {
+		Map<String, AbstractGraphElement> idMap = new HashMap<String, AbstractGraphElement>();
+		return convertFromNet(net, marking, finalMarkings, idMap, layout);
+	}
 
-//	public Pnml convertFromNet(PetrinetGraph net, Marking marking, Collection<Marking> finalMarkings,
-//			Map<String, AbstractGraphElement> idMap, GraphLayoutConnection layout) {
-//		synchronized (factory) {
-//			if (net instanceof OpenNet) {
-//				module = factory.createPnmlModule();
-//				module.convertFromOpenNet((OpenNet) net, marking, idMap, layout);
-//			} else {
-//				Map<Pair<AbstractGraphElement, ExpandableSubNet>, String> map = new HashMap<Pair<AbstractGraphElement, ExpandableSubNet>, String>();
-//				netList.add(factory.createPnmlNet().convertFromNet(net, marking, finalMarkings, map, 1, idMap, layout));
-//				Map<AbstractGraphElement, String> map2 = new HashMap<AbstractGraphElement, String>();
-//				for (Pair<AbstractGraphElement, ExpandableSubNet> pair : map.keySet()) {
-//					map2.put(pair.getFirst(), map.get(pair));
-//				}
-//				if (net instanceof ConfigurableResetInhibitorNet) {
-//					ConfigurableResetInhibitorNet configurableNet = (ConfigurableResetInhibitorNet) net;
-//					configuration = factory.createPnmlConfiguration();
-//					configuration.convertFromNet(configurableNet, map2);
-//				}
-//			}
-//			return this;
-//		}
-//	}
+	public Pnml convertFromNet(PetrinetGraph net, Marking marking, Map<String, AbstractGraphElement> idMap,
+			GraphLayoutConnection layout) {
+		return convertFromNet(net, marking, new HashSet<Marking>(), idMap, layout);
+	}
+
+	public Pnml convertFromNet(PetrinetGraph net, Marking marking, Collection<Marking> finalMarkings,
+			Map<String, AbstractGraphElement> idMap, GraphLayoutConnection layout) {
+		synchronized (factory) {
+			if (net instanceof OpenNet) {
+				module = factory.createPnmlModule();
+				module.convertFromOpenNet((OpenNet) net, marking, idMap, layout);
+			} else {
+				Map<Pair<AbstractGraphElement, ExpandableSubNet>, String> map = new HashMap<Pair<AbstractGraphElement, ExpandableSubNet>, String>();
+				netList.add(factory.createPnmlNet().convertFromNet(net, marking, finalMarkings, map, 1, idMap, layout));
+				Map<AbstractGraphElement, String> map2 = new HashMap<AbstractGraphElement, String>();
+				for (Pair<AbstractGraphElement, ExpandableSubNet> pair : map.keySet()) {
+					map2.put(pair.getFirst(), map.get(pair));
+				}
+				if (net instanceof ConfigurableResetInhibitorNet) {
+					ConfigurableResetInhibitorNet configurableNet = (ConfigurableResetInhibitorNet) net;
+					configuration = factory.createPnmlConfiguration();
+					configuration.convertFromNet(configurableNet, map2);
+				}
+			}
+			return this;
+		}
+	}
 
 	public void setName(String name) {
 		if (module != null) {

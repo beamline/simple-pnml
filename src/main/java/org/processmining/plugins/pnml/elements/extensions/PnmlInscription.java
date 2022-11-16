@@ -55,7 +55,7 @@ public class PnmlInscription extends PnmlAnnotation {
 		 */
 		int value = Integer.valueOf(text.getText());
 		if (value <= 0) {
-//			pnml.log(tag, lineNumber, "Expected positive integer");
+			pnml.log(tag, lineNumber, "Expected positive integer");
 		}
 	}
 

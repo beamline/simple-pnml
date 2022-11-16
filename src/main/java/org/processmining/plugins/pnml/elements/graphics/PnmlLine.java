@@ -2,7 +2,6 @@ package org.processmining.plugins.pnml.elements.graphics;
 
 import java.awt.Color;
 
-//import org.jgraph.graph.GraphConstants;
 import org.processmining.models.graphbased.AbstractGraphElement;
 import org.processmining.models.graphbased.AttributeMap;
 import org.processmining.models.graphbased.directed.petrinet.elements.Arc;
@@ -231,12 +230,12 @@ public class PnmlLine extends PnmlElement {
 	 *            The given element.
 	 */
 	public void convertToNet(AbstractGraphElement element) {
-		if (shape != Shape.SHAPE_DEFAULT) {
+//		if (shape != Shape.SHAPE_DEFAULT) {
 //			int style = (shape == Shape.SHAPE_LINE ? GraphConstants.STYLE_ORTHOGONAL : GraphConstants.STYLE_SPLINE);
-			element.getAttributeMap().put(AttributeMap.STYLE, style);
-		} else {
+//			element.getAttributeMap().put(AttributeMap.STYLE, style);
+//		} else {
 //			element.getAttributeMap().put(AttributeMap.STYLE, GraphConstants.STYLE_SPLINE);
-		}
+//		}
 		if (color != null) {
 			/*
 			 * Set color.
@@ -282,7 +281,7 @@ public class PnmlLine extends PnmlElement {
 
 	public PnmlLine convertFromNet(AbstractGraphElement element) {
 		PnmlLine line = null;
-		try {
+//		try {
 //			int style = element.getAttributeMap().get(AttributeMap.STYLE, GraphConstants.STYLE_SPLINE);
 //			switch (style) {
 //				case GraphConstants.STYLE_SPLINE :
@@ -294,9 +293,9 @@ public class PnmlLine extends PnmlElement {
 //					shape = Shape.SHAPE_LINE;
 //					break;
 //			}
-		} catch (Exception ex) {
-			System.err.println(ex);
-		}
+//		} catch (Exception ex) {
+//			System.err.println(ex);
+//		}
 		try {
 			Color color;
 			if (element instanceof Arc) {

@@ -109,7 +109,7 @@ public class PnmlArcGraphics extends PnmlElement {
 	public void convertToNet(ExpandableSubNet subNet, AbstractGraphElement element, Point2D.Double displacement,
 			GraphLayoutConnection layout) {
 		ArrayList<Point2D> points = new ArrayList<Point2D>();
-//		layout.setEdgePoints(element, points);
+		layout.setEdgePoints(element, points);
 		for (PnmlPosition position : positionList) {
 			position.convertToNet(subNet, element, points, displacement);
 		}
