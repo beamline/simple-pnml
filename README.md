@@ -1,4 +1,5 @@
-# Simple PNML
+# Simple PNML [![](https://jitpack.io/v/beamline/simple-pnml.svg)](https://jitpack.io/#beamline/simple-pnml)
+
 
 `simple-pnml` is a library to model Petri nets and [de]serialize them as PNML XML files.
 
