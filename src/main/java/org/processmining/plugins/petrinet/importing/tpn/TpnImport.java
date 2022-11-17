@@ -41,7 +41,7 @@ public class TpnImport {
 	 */
 	public final static String INVISIBLE_EVENT_TYPE = "$invisible$";
 
-	public Object[] importFromStream(InputStream input) throws Exception {
+	public static Object[] importFromStream(InputStream input) throws Exception {
 		Petrinet petrinet = PetrinetFactory.newPetrinet("new net");
 		TpnParser parser = new TpnParser(input);
 		// LogEvents logEvents = null;

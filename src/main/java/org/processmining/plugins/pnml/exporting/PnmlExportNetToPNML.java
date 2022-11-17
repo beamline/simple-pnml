@@ -11,15 +11,15 @@ import org.processmining.plugins.pnml.base.Pnml;
 
 public class PnmlExportNetToPNML extends PnmlExportNet {
 
-	public void exportPetriNetToPNMLFile(Petrinet net, Marking marking, File file) throws IOException {
+	public static void exportPetriNetToPNMLFile(Petrinet net, Marking marking, File file) throws IOException {
 		exportPetriNetToPNMLOrEPNMLFile(net, marking, file, Pnml.PnmlType.PNML);
 	}
 
-	public void exportPetriNetToPNMLFile(OpenNet openNet, Marking marking, File file) throws IOException {
+	public static void exportPetriNetToPNMLFile(OpenNet openNet, Marking marking, File file) throws IOException {
 		exportPetriNetToPNMLOrEPNMLFile(openNet, marking, file, Pnml.PnmlType.PNML);
 	}
 
-	public void exportPetriNetToPNMLFile(ConfigurableResetInhibitorNet configurableNet, Marking marking, File file) throws IOException {
+	public static void exportPetriNetToPNMLFile(ConfigurableResetInhibitorNet configurableNet, Marking marking, File file) throws IOException {
 		exportPetriNetToPNMLOrEPNMLFile(configurableNet, marking, file, Pnml.PnmlType.PNML);
 	}
 }

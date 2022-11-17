@@ -77,7 +77,7 @@ public class PnmlExportNet {
 				.exportElement(pnml);
 	}
 
-	protected void exportPetriNetToPNMLOrEPNMLFile(Petrinet net, Marking marking, File file, Pnml.PnmlType type)
+	protected static void exportPetriNetToPNMLOrEPNMLFile(Petrinet net, Marking marking, File file, Pnml.PnmlType type)
 			throws IOException {
 //		Marking marking;
 //		try {
@@ -127,7 +127,7 @@ public class PnmlExportNet {
 		bw.close();
 	}
 
-	protected void exportPetriNetToPNMLOrEPNMLFile(OpenNet openNet, Marking marking, File file, Pnml.PnmlType type)
+	protected static void exportPetriNetToPNMLOrEPNMLFile(OpenNet openNet, Marking marking, File file, Pnml.PnmlType type)
 			throws IOException {
 //		Marking marking;
 //		try {
@@ -161,7 +161,7 @@ public class PnmlExportNet {
 		bw.close();
 	}
 
-	protected void exportPetriNetToPNMLOrEPNMLFile(ResetNet resetNet, Marking marking, File file, PnmlType type)
+	protected static void exportPetriNetToPNMLOrEPNMLFile(ResetNet resetNet, Marking marking, File file, PnmlType type)
 			throws IOException {
 //		Marking marking;
 //		try {
@@ -206,7 +206,7 @@ public class PnmlExportNet {
 
 	}
 
-	protected void exportPetriNetToPNMLOrEPNMLFile(
+	protected static void exportPetriNetToPNMLOrEPNMLFile(
 			ConfigurableResetInhibitorNet resetInhibitorNet, Marking marking, File file, PnmlType type) throws IOException {
 //		Marking marking;
 //		try {
