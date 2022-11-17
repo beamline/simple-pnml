@@ -1,7 +1,7 @@
 # Simple PNML [![](https://jitpack.io/v/beamline/simple-pnml.svg)](https://jitpack.io/#beamline/simple-pnml)
 
 
-`simple-pnml` is a library to model Petri nets and [de]serialize them as PNML XML files.
+`simple-pnml` is a library to describe Petri nets and [de]serialize them as PNML and TPN file formats.
 
 > **Attention:** this library is actually the porting of the **ProM PetriNets package**, which has been isolated out of the ProM environment and has been made available as Maven dependency. Therefore, the authors of this `simple-pnml` library are the authors of the ProM version of the PetriNets package (module some changes made by Andrea Burattin for isolating the library from ProM and making it self-contained).
 > The ProM package PetriNets is licensed as L-GPL so this distribution is as well. The original source code of the ProM PetriNets package is located at https://svn.win.tue.nl/repos/prom/Packages/PetriNets/. The ProM packages licenses are discussed in http://www.promtools.org/doku.php?id=packlicense and for general information on ProM you can visit http://www.promtools.org/.
