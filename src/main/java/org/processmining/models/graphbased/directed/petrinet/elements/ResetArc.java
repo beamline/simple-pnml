@@ -1,11 +1,13 @@
 package org.processmining.models.graphbased.directed.petrinet.elements;
 
+import java.io.Serializable;
+
 import org.processmining.models.graphbased.AttributeMap;
 import org.processmining.models.graphbased.AttributeMap.ArrowType;
 import org.processmining.models.graphbased.LocalNodeID;
 import org.processmining.models.graphbased.directed.petrinet.PetrinetEdge;
 
-public class ResetArc extends PetrinetEdge<Place, Transition> {
+public class ResetArc extends PetrinetEdge<Place, Transition> implements Serializable {
 
 	public ResetArc(Place source, Transition target, String label) {
 		this(source, target, label, null);

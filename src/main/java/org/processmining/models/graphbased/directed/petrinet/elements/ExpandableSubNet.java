@@ -2,6 +2,7 @@ package org.processmining.models.graphbased.directed.petrinet.elements;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,7 +17,7 @@ import org.processmining.models.graphbased.directed.petrinet.PetrinetEdge;
 import org.processmining.models.graphbased.directed.petrinet.PetrinetNode;
 import org.processmining.models.shapes.Rectangle;
 
-public class ExpandableSubNet extends PetrinetNode implements ContainingDirectedGraphNode {
+public class ExpandableSubNet extends PetrinetNode implements ContainingDirectedGraphNode, Serializable {
 
 	private final Set<ContainableDirectedGraphElement> children;
 

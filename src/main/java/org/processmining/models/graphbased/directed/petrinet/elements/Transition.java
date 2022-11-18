@@ -2,6 +2,7 @@ package org.processmining.models.graphbased.directed.petrinet.elements;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -15,7 +16,7 @@ import org.processmining.models.graphbased.directed.utils.GraphIterator.EdgeAcce
 import org.processmining.models.graphbased.directed.utils.GraphIterator.NodeAcceptor;
 import org.processmining.models.shapes.Rectangle;
 
-public class Transition extends PetrinetNode {
+public class Transition extends PetrinetNode implements Serializable {
 
 	private static final long serialVersionUID = 4097151075956253592L;
 

@@ -1,6 +1,7 @@
 package org.processmining.models.graphbased.directed.petrinet.elements;
 
 import java.awt.Dimension;
+import java.io.Serializable;
 
 import javax.swing.SwingConstants;
 
@@ -11,7 +12,7 @@ import org.processmining.models.graphbased.directed.petrinet.PetrinetEdge;
 import org.processmining.models.graphbased.directed.petrinet.PetrinetNode;
 import org.processmining.models.shapes.Ellipse;
 
-public class Place extends PetrinetNode {
+public class Place extends PetrinetNode implements Serializable {
 
 	private static final long serialVersionUID = -140549782392304694L;
 

@@ -1,12 +1,14 @@
 package org.processmining.models.graphbased.directed.petrinet.elements;
 
+import java.io.Serializable;
+
 import org.processmining.models.graphbased.AttributeMap;
 import org.processmining.models.graphbased.AttributeMap.ArrowType;
 import org.processmining.models.graphbased.LocalNodeID;
 import org.processmining.models.graphbased.directed.petrinet.PetrinetEdge;
 import org.processmining.models.graphbased.directed.petrinet.PetrinetNode;
 
-public class Arc extends PetrinetEdge<PetrinetNode, PetrinetNode> {
+public class Arc extends PetrinetEdge<PetrinetNode, PetrinetNode> implements Serializable {
 
 	private int weight;
 
