@@ -1,5 +1,6 @@
 package org.processmining.models.graphbased.directed.petrinet;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import org.processmining.models.graphbased.directed.DirectedGraph;
@@ -9,7 +10,7 @@ import org.processmining.models.graphbased.directed.petrinet.elements.Place;
 import org.processmining.models.graphbased.directed.petrinet.elements.Transition;
 
 public interface PetrinetGraph extends
-		DirectedGraph<PetrinetNode, PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode>> {
+		DirectedGraph<PetrinetNode, PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode>>, Serializable {
 
 	String getLabel();
 
