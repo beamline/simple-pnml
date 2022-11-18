@@ -1,5 +1,6 @@
 package org.processmining.models.graphbased.directed.petrinet.impl;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -31,7 +32,7 @@ import org.processmining.models.graphbased.directed.petrinet.elements.Transition
 // All implementing classes should decide which interfaces to implement.
 
 public abstract class AbstractResetInhibitorNet extends
-		AbstractDirectedGraph<PetrinetNode, PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode>> {
+		AbstractDirectedGraph<PetrinetNode, PetrinetEdge<? extends PetrinetNode, ? extends PetrinetNode>> implements Serializable {
 
 	protected final Set<Transition> transitions;
 	protected final Set<ExpandableSubNet> substitutionTransitions;
