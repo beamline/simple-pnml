@@ -1,5 +1,6 @@
 package org.processmining.models.semantics.petrinet;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
@@ -7,7 +8,7 @@ import java.util.Map;
 import org.processmining.framework.util.collection.TreeMultiSet;
 import org.processmining.models.graphbased.directed.petrinet.elements.Place;
 
-public class Marking extends TreeMultiSet<Place> implements Comparable<Marking> {
+public class Marking extends TreeMultiSet<Place> implements Comparable<Marking>, Serializable {
 
 	public Marking(Collection<Place> collection) {
 		super(collection);

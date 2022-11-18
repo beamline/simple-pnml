@@ -1,5 +1,7 @@
 package org.processmining.models.graphbased.directed.petrinet;
 
+import java.io.Serializable;
+
 import org.processmining.models.graphbased.AttributeMap;
 import org.processmining.models.graphbased.LocalNodeID;
 import org.processmining.models.graphbased.directed.AbstractDirectedGraph;
@@ -7,7 +9,7 @@ import org.processmining.models.graphbased.directed.AbstractDirectedGraphNode;
 import org.processmining.models.graphbased.directed.ContainableDirectedGraphElement;
 import org.processmining.models.graphbased.directed.petrinet.elements.ExpandableSubNet;
 
-public abstract class PetrinetNode extends AbstractDirectedGraphNode implements ContainableDirectedGraphElement {
+public abstract class PetrinetNode extends AbstractDirectedGraphNode implements ContainableDirectedGraphElement, Serializable {
 
 	private final ExpandableSubNet parent;
 	protected int stdWidth = 50;
